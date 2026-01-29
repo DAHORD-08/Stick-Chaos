@@ -1,18 +1,29 @@
 using UnityEngine;
 
-public class Paralax : MonoBehaviour
+public class ParallaxBackground : MonoBehaviour
 {
-    private float _start;
-    public float _speed;
+    [Range(0f, 1f)]
+    public float parallaxSpeed = 0.5f;
+
+    private Transform cameraTransform;
+    private Vector3 lastCameraPosition;
+
     void Start()
     {
-        _start = transform.position.x;
+        cameraTransform = Camera.main.transform;
+        lastCameraPosition = cameraTransform.position;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void LateUpdate()
     {
-        float change = Camera.main.transform.position.x * _speed;
-        transform.position = new Vector3(_start + change, transform.position.y, transform.position.z);
+        Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
+
+        transform.position += new Vector3(
+            deltaMovement.x * parallaxSpeed,
+            deltaMovement.y * parallaxSpeed,
+            0
+        );
+
+        lastCameraPosition = cameraTransform.position;
     }
 }

@@ -1699,6 +1699,8 @@ GameObject:
   - component: {fileID: 1336468985}
   - component: {fileID: 1336468986}
   - component: {fileID: 1336468987}
+  - component: {fileID: 1336468989}
+  - component: {fileID: 1336468988}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1765,6 +1767,44 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1336468988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336468984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b4d84c1e6c0194eb62b9c6b6ca8e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Balance
+  targetRotation: 0
+  force: 0
+--- !u!114 &1336468989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336468984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f228b8eee78dc8428a378496592c7e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Movement
+  leftleg: {fileID: 0}
+  rightleg: {fileID: 0}
+  rb: {fileID: 0}
+  anim: {fileID: 0}
+  speed: 1.5
+  stepWait: 0.5
+  jumpForce: 10
+  positionRadius: 0
+  ground:
+    serializedVersion: 2
+    m_Bits: 0
+  playerPos: {fileID: 0}
 --- !u!1 &1493001465
 GameObject:
   m_ObjectHideFlags: 0

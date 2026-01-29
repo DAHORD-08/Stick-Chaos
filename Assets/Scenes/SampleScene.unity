@@ -1986,14 +1986,14 @@ MonoBehaviour:
   rightLeg: {fileID: 1131781577}
   rb: {fileID: 369439570}
   anim: {fileID: 1336468990}
-  speed: 1.5
+  playerPos: {fileID: 830466100}
+  speed: 30
   stepWait: 0.5
-  jumpForce: 2500
+  jumpForce: 10000
   positionRadius: 0.3
   ground:
     serializedVersion: 2
     m_Bits: 8
-  playerPos: {fileID: 830466100}
 --- !u!1 &1493001465
 GameObject:
   m_ObjectHideFlags: 0

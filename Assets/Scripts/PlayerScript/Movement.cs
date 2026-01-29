@@ -1,72 +1,87 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem; // <-- AJOUT
 
 public class Movement : MonoBehaviour
 {
-    public GameObject leftLeg;
-    public GameObject rightLeg;
-    Rigidbody2D leftLegRB;
-    Rigidbody2D rightLegRB;
-    public Rigidbody2D rb;
+    [Header("Components")]
+    [SerializeField] private GameObject leftLeg;
+    [SerializeField] private GameObject rightLeg;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Animator anim;
+    [SerializeField] private Transform playerPos;
 
-    public Animator anim;
+    [Header("Movement Settings")]
+    [SerializeField] private float speed = 1.5f;
+    [SerializeField] private float stepWait = 0.5f;
+    [SerializeField] private float jumpForce = 10f;
 
-    [SerializeField] float speed = 1.5f;
-    [SerializeField] float stepWait = .5f;
-    [SerializeField] float jumpForce = 10;
-    private bool isOnGround;
-    public float positionRadius;
-    public LayerMask ground;
-    public Transform playerPos;
+    [Header("Collision Settings")]
+    [SerializeField] private float positionRadius = 0.2f;
+    [SerializeField] private LayerMask ground;
 
-    void Start()
+    private Rigidbody2D _leftLegRB;
+    private Rigidbody2D _rightLegRB;
+    private bool _isOnGround;
+    private bool _isWalking;
+
+    private void Start()
     {
-        leftLegRB = leftLeg.GetComponent<Rigidbody2D>();
-        rightLegRB = rightLeg.GetComponent<Rigidbody2D>();
+        if (leftLeg != null) _leftLegRB = leftLeg.GetComponent<Rigidbody2D>();
+        if (rightLeg != null) _rightLegRB = rightLeg.GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0)
+        HandleMovementInput();
+        HandleJumpInput();
+    }
+
+    private void HandleMovementInput()
+    {
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+
+        if (horizontalInput != 0)
         {
-            if (Input.GetAxisRaw("Horizontal") > 0)
+            if (!_isWalking)
             {
-                anim.Play("WalkRight");
-                StartCoroutine(MoveRight(stepWait));
-            }
-            else
-            {
-                anim.Play("WalkLeft");
-                StartCoroutine(MoveLeft(stepWait));
+                string animationName = horizontalInput > 0 ? "WalkRight" : "WalkLeft";
+                anim.Play(animationName);
+                StartCoroutine(WalkCycle(horizontalInput));
             }
         }
         else
         {
+            _isWalking = false;
+            StopAllCoroutines();
             anim.Play("Idle");
         }
+    }
 
-        isOnGround = Physics2D.OverlapCircle(playerPos.position, positionRadius, ground);
+    private void HandleJumpInput()
+    {
+        _isOnGround = Physics2D.OverlapCircle(playerPos.position, positionRadius, ground);
 
-        if (isOnGround == true && Input.GetKeyDown(KeyCode.Space))
+        // Input.GetAxisRaw("Vertical") > 0 gère Z, W et la flèche haut simultanément
+        bool jumpPressed = Input.GetKeyDown(KeyCode.Space) || Input.GetAxisRaw("Vertical") > 0;
+
+        if (_isOnGround && jumpPressed)
         {
             rb.AddForce(Vector2.up * jumpForce);
         }
-
     }
 
-    IEnumerator MoveRight(float seconds)
+    private IEnumerator WalkCycle(float direction)
     {
-        leftLegRB.AddForce(Vector2.right * (speed * 1000) * Time.deltaTime);
-        yield return new WaitForSeconds(seconds);
-        rightLegRB.AddForce(Vector2.right * (speed * 1000) * Time.deltaTime);
-    }
+        _isWalking = true;
+        Vector2 force = new Vector2(direction, 0) * (speed * 1000);
 
-    IEnumerator MoveLeft(float seconds)
-    {
-        rightLegRB.AddForce(Vector2.left * (speed * 1000) * Time.deltaTime);
-        yield return new WaitForSeconds(seconds);
-        leftLegRB.AddForce(Vector2.left * (speed * 1000) * Time.deltaTime);
+        while (_isWalking)
+        {
+            _leftLegRB.AddForce(force * Time.deltaTime);
+            yield return new WaitForSeconds(stepWait);
+
+            _rightLegRB.AddForce(force * Time.deltaTime);
+            yield return new WaitForSeconds(stepWait);
+        }
     }
 }

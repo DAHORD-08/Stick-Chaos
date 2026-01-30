@@ -94,7 +94,6 @@ public class Movement : MonoBehaviour
 
     private void FlipCharacter(float direction)
     {
-        // On ne change le scale que si nécessaire pour éviter les calculs inutiles
         if (GFX_Container == null) return;
 
         float currentX = GFX_Container.localScale.x;
@@ -103,11 +102,27 @@ public class Movement : MonoBehaviour
         // Si le signe est déjà celui désiré, rien à faire
         if (Mathf.Sign(currentX) == desiredSign) return;
 
-        // --- Sauvegarde de la position avant flip ---
+        // --- Collecte et sauvegarde des rigidbodies enfants (positions, rotations, vitesses) ---
+        Rigidbody2D[] childRbs = GFX_Container.GetComponentsInChildren<Rigidbody2D>(true);
+
+        Vector2[] savedPositions = new Vector2[childRbs.Length];
+        float[] savedRotations = new float[childRbs.Length];
+        Vector2[] savedVelocities = new Vector2[childRbs.Length];
+
+        for (int i = 0; i < childRbs.Length; i++)
+        {
+            savedPositions[i] = childRbs[i].position;
+            savedRotations[i] = childRbs[i].rotation;
+            savedVelocities[i] = childRbs[i].linearVelocity;
+
+            // Désactive temporairement la simulation pour éviter recomputations physiques durant le flip
+            childRbs[i].simulated = false;
+        }
+
+        // --- Sauvegarde de la position du joueur (physique principal) comme auparavant ---
         Vector3 savedWorldPos;
         if (rb != null)
         {
-            // Rigidbody2D utilise Vector2, on convertit en Vector3 pour garder la z
             savedWorldPos = new Vector3(rb.position.x, rb.position.y, transform.position.z);
         }
         else
@@ -120,13 +135,22 @@ public class Movement : MonoBehaviour
         float absX = Mathf.Abs(s.x);
         GFX_Container.localScale = new Vector3(absX * desiredSign, s.y, s.z);
 
-        // --- Restauration de la position après flip ---
+        // --- Restauration des positions/rotations/vitesses des rigidbodies et réactivation ---
+        for (int i = 0; i < childRbs.Length; i++)
+        {
+            // repositionne via Rigidbody2D pour respecter la physique
+            childRbs[i].position = savedPositions[i];
+            childRbs[i].rotation = savedRotations[i];
+            childRbs[i].linearVelocity = savedVelocities[i];
+
+            childRbs[i].simulated = true;
+            childRbs[i].WakeUp();
+        }
+
+        // --- Restauration de la position principale du joueur ---
         if (rb != null)
         {
-            // On repositionne le Rigidbody (évite conflits physiques avec transform)
             rb.position = new Vector2(savedWorldPos.x, savedWorldPos.y);
-            // Si nécessaire, on peut aussi réinitialiser la vitesse verticale/horizontale, ex:
-            // rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
         }
         else
         {

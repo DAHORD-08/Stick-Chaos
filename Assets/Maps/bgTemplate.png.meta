@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8bae8e7da10224b43b83d2f11810502b
+guid: 01a609c3e1eef4a43af10da032f0c16c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bg_test_0
+      name: bgTemplate_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 518e59578ca38c24e9ebd31bb739ea5b
-      internalID: -464821980
+      spriteID: 851ca0f87c30e824bb6f318123e9956e
+      internalID: -2004247334
       vertices: []
       indices: 
       edges: []
@@ -122,7 +122,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: bc8f825d7c0083744882ae0ed35027b8
+    spriteID: ec578a58fad2e7e49bc605c92e5f5ec2
     internalID: 0
     vertices: []
     indices: 
@@ -132,7 +132,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bg_test_0: -464821980
+      bgTemplate_0: -2004247334
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

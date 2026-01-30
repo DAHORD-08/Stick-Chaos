@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ParallaxBackground : MonoBehaviour
 {
-    [Range(0f, 1f)]
+    [Range(0f, 5f)]
     public float parallaxSpeed = 0.5f;
 
     private Transform cameraTransform;

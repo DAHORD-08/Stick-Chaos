@@ -1,160 +1,79 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem; // <-- AJOUT
 
 public class Movement : MonoBehaviour
 {
-    [Header("Components")]
-    [SerializeField] private GameObject leftLeg;
-    [SerializeField] private GameObject rightLeg;
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Animator anim;
-    [SerializeField] private Transform playerPos;
+    public GameObject leftleg;
+    public GameObject rightleg;
+    Rigidbody2D leftLegRB;
+    Rigidbody2D rightLegRB;
+    public Rigidbody2D rb;
 
-    [Header("Movement Settings")]
-    [SerializeField] private float speed = 1.5f;
-    [SerializeField] private float stepWait = 0.5f;
-    [SerializeField] private float jumpForce = 10f;
+    public Animator anim;
 
-    [Header("Collision Settings")]
-    [SerializeField] private float positionRadius = 0.2f;
-    [SerializeField] private LayerMask ground;
+    [SerializeField] float speed = 1.5f;
+    [SerializeField] float stepWait = .5f;
+    [SerializeField] float jumpForce = 10;
+    private bool isOnGround;
+    public float positionRadius;
+    public LayerMask ground;
+    public Transform playerPos; 
 
-    [Header("Graphics Reference")]
-    [SerializeField] private Transform GFX_Container;
-
-    private Rigidbody2D _leftLegRB;
-    private Rigidbody2D _rightLegRB;
-    private bool _isOnGround;
-    private bool _isWalking;
-
-    private void Start()
+    void Start()
     {
-        if (leftLeg != null) _leftLegRB = leftLeg.GetComponent<Rigidbody2D>();
-        if (rightLeg != null) _rightLegRB = rightLeg.GetComponent<Rigidbody2D>();
+        leftLegRB = leftleg.GetComponent<Rigidbody2D>();
+        rightLegRB = rightleg.GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    void Update()
     {
-        HandleMovementInput();
-        HandleJumpInput();
-    }
+        float horizontal = 0f;
 
-    private void HandleMovementInput()
-    {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-
-        if (horizontalInput != 0)
+        if (Keyboard.current != null)
         {
+            if (Keyboard.current.aKey.isPressed) horizontal = -1;
+            if (Keyboard.current.dKey.isPressed) horizontal = 0;
+        }
 
-            FlipCharacter(horizontalInput);
-
-            if (!_isWalking)
+        if (horizontal != 0)
+        {
+            if (horizontal > 0)
             {
-                anim.Play("Walk");
-                StartCoroutine(WalkCycle(horizontalInput));
+                anim.Play("WalkRight");
+                StartCoroutine(MoveRight(stepWait));
+            }
+            else
+            {
+                anim.Play("WalkLeft");
+                StartCoroutine(MoveLeft(stepWait));
             }
         }
         else
         {
-            _isWalking = false;
-            StopAllCoroutines();
             anim.Play("Idle");
         }
-    }
 
-    private void HandleJumpInput()
-    {
-        _isOnGround = Physics2D.OverlapCircle(playerPos.position, positionRadius, ground);
+        isOnGround = Physics2D.OverlapCircle(playerPos.position, positionRadius, ground);
 
-        // GetButtonDown("Jump") gère Espace par défaut dans Unity.
-        // Pour ZQSD/WASD/Flèches, on vérifie si l'axe Vertical vient de dépasser un seuil.
-        bool jumpKeyPressed = Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.W);
-
-        if (_isOnGround && jumpKeyPressed)
+        if (isOnGround && Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
             rb.AddForce(Vector2.up * jumpForce);
         }
     }
 
-    private IEnumerator WalkCycle(float direction)
+    IEnumerator MoveRight(float seconds)
     {
-        _isWalking = true;
-        Vector2 force = new Vector2(direction, 0) * (speed * 1000);
-
-        while (_isWalking)
-        {
-            _leftLegRB.AddForce(force * Time.deltaTime);
-            yield return new WaitForSeconds(stepWait);
-
-            _rightLegRB.AddForce(force * Time.deltaTime);
-            yield return new WaitForSeconds(stepWait);
-        }
+        leftLegRB.AddForce(Vector2.right * (speed * 1000) * Time.deltaTime);
+        yield return new WaitForSeconds(seconds);
+        rightLegRB.AddForce(Vector2.right * (speed * 1000) * Time.deltaTime);
     }
 
-    private void FlipCharacter(float direction)
+    IEnumerator MoveLeft(float seconds)
     {
-        if (GFX_Container == null) return;
-
-        float currentX = GFX_Container.localScale.x;
-        float desiredSign = direction > 0 ? 1f : -1f;
-
-        // Si le signe est déjà celui désiré, rien à faire
-        if (Mathf.Sign(currentX) == desiredSign) return;
-
-        // --- Collecte et sauvegarde des rigidbodies enfants (positions, rotations, vitesses) ---
-        Rigidbody2D[] childRbs = GFX_Container.GetComponentsInChildren<Rigidbody2D>(true);
-
-        Vector2[] savedPositions = new Vector2[childRbs.Length];
-        float[] savedRotations = new float[childRbs.Length];
-        Vector2[] savedVelocities = new Vector2[childRbs.Length];
-
-        for (int i = 0; i < childRbs.Length; i++)
-        {
-            savedPositions[i] = childRbs[i].position;
-            savedRotations[i] = childRbs[i].rotation;
-            savedVelocities[i] = childRbs[i].linearVelocity;
-
-            // Désactive temporairement la simulation pour éviter recomputations physiques durant le flip
-            childRbs[i].simulated = false;
-        }
-
-        // --- Sauvegarde de la position du joueur (physique principal) comme auparavant ---
-        Vector3 savedWorldPos;
-        if (rb != null)
-        {
-            savedWorldPos = new Vector3(rb.position.x, rb.position.y, transform.position.z);
-        }
-        else
-        {
-            savedWorldPos = transform.position;
-        }
-
-        // --- Effectue le flip en conservant la magnitude de l'échelle X ---
-        Vector3 s = GFX_Container.localScale;
-        float absX = Mathf.Abs(s.x);
-        GFX_Container.localScale = new Vector3(absX * desiredSign, s.y, s.z);
-
-        // --- Restauration des positions/rotations/vitesses des rigidbodies et réactivation ---
-        for (int i = 0; i < childRbs.Length; i++)
-        {
-            // repositionne via Rigidbody2D pour respecter la physique
-            childRbs[i].position = savedPositions[i];
-            childRbs[i].rotation = savedRotations[i];
-            childRbs[i].linearVelocity = savedVelocities[i];
-
-            childRbs[i].simulated = true;
-            childRbs[i].WakeUp();
-        }
-
-        // --- Restauration de la position principale du joueur ---
-        if (rb != null)
-        {
-            rb.position = new Vector2(savedWorldPos.x, savedWorldPos.y);
-        }
-        else
-        {
-            transform.position = savedWorldPos;
-        }
+        rightLegRB.AddForce(Vector2.left * (speed * 1000) * Time.deltaTime);
+        yield return new WaitForSeconds(seconds);
+        leftLegRB.AddForce(Vector2.left * (speed * 1000) * Time.deltaTime);
     }
 }

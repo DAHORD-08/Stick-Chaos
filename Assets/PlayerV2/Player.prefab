@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3420258276919746845}
   - component: {fileID: 2607001762258243804}
   m_Layer: 0
-  m_Name: ClassicHand
+  m_Name: ClassicHand_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 6285687405939595275}
   - component: {fileID: 2824373926755286288}
   m_Layer: 0
-  m_Name: ClassicLeg
+  m_Name: ClassicLeg_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 3724785311409607401}
   - component: {fileID: 4934506136095378922}
   m_Layer: 0
-  m_Name: ClassicBras
+  m_Name: ClassicBras_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 5269279409783664010}
   - component: {fileID: 970799314348856151}
   m_Layer: 0
-  m_Name: ClassicFoot
+  m_Name: ClassicFoot_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -466,7 +466,7 @@ GameObject:
   - component: {fileID: 1247683825401819603}
   - component: {fileID: 7589784810646562119}
   m_Layer: 0
-  m_Name: ClassicFoot
+  m_Name: ClassicFoot_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -557,7 +557,7 @@ GameObject:
   - component: {fileID: 1258222130363765221}
   - component: {fileID: 3013426845889833346}
   m_Layer: 0
-  m_Name: ClassicHand
+  m_Name: ClassicHand_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 5937863473136916336}
   - component: {fileID: 1731775908197253166}
   m_Layer: 0
-  m_Name: ClassicBras
+  m_Name: ClassicBras_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -739,7 +739,7 @@ GameObject:
   - component: {fileID: 2878967315738878220}
   - component: {fileID: 6963125674113139820}
   m_Layer: 0
-  m_Name: ClassicLeg
+  m_Name: ClassicLeg_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -848,16 +848,16 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1258222130363765221}
-  - {fileID: 3420258276919746845}
-  - {fileID: 4577076803355087494}
-  - {fileID: 2878967315738878220}
-  - {fileID: 6285687405939595275}
-  - {fileID: 1247683825401819603}
-  - {fileID: 5269279409783664010}
   - {fileID: 6696650953381135918}
-  - {fileID: 5937863473136916336}
+  - {fileID: 4577076803355087494}
   - {fileID: 3724785311409607401}
+  - {fileID: 3420258276919746845}
+  - {fileID: 5937863473136916336}
+  - {fileID: 1258222130363765221}
+  - {fileID: 2878967315738878220}
+  - {fileID: 1247683825401819603}
+  - {fileID: 6285687405939595275}
+  - {fileID: 5269279409783664010}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9219296697377334473

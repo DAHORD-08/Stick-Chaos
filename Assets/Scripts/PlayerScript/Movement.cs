@@ -95,13 +95,42 @@ public class Movement : MonoBehaviour
     private void FlipCharacter(float direction)
     {
         // On ne change le scale que si nécessaire pour éviter les calculs inutiles
-        if (direction > 0 && GFX_Container.localScale.x < 0)
+        if (GFX_Container == null) return;
+
+        float currentX = GFX_Container.localScale.x;
+        float desiredSign = direction > 0 ? 1f : -1f;
+
+        // Si le signe est déjà celui désiré, rien à faire
+        if (Mathf.Sign(currentX) == desiredSign) return;
+
+        // --- Sauvegarde de la position avant flip ---
+        Vector3 savedWorldPos;
+        if (rb != null)
         {
-            GFX_Container.localScale = new Vector3(1, 1, 1);
+            // Rigidbody2D utilise Vector2, on convertit en Vector3 pour garder la z
+            savedWorldPos = new Vector3(rb.position.x, rb.position.y, transform.position.z);
         }
-        else if (direction < 0 && GFX_Container.localScale.x > 0)
+        else
         {
-            GFX_Container.localScale = new Vector3(-1, 1, 1);
+            savedWorldPos = transform.position;
+        }
+
+        // --- Effectue le flip en conservant la magnitude de l'échelle X ---
+        Vector3 s = GFX_Container.localScale;
+        float absX = Mathf.Abs(s.x);
+        GFX_Container.localScale = new Vector3(absX * desiredSign, s.y, s.z);
+
+        // --- Restauration de la position après flip ---
+        if (rb != null)
+        {
+            // On repositionne le Rigidbody (évite conflits physiques avec transform)
+            rb.position = new Vector2(savedWorldPos.x, savedWorldPos.y);
+            // Si nécessaire, on peut aussi réinitialiser la vitesse verticale/horizontale, ex:
+            // rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
+        }
+        else
+        {
+            transform.position = savedWorldPos;
         }
     }
 }

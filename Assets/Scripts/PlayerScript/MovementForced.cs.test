@@ -19,8 +19,17 @@ public class Movement : MonoBehaviour
     [SerializeField] private float positionRadius = 0.2f;
     [SerializeField] private LayerMask ground;
 
-    [Header("Graphics Reference")]
-    [SerializeField] private Transform GFX_Container;
+    [Header("Sprite References - Assigne tous tes sprites ici")]
+    [SerializeField] private SpriteRenderer headSprite;
+    [SerializeField] private SpriteRenderer bodySprite;
+    [SerializeField] private SpriteRenderer topLeftArmSprite;
+    [SerializeField] private SpriteRenderer bottomLeftArmSprite;
+    [SerializeField] private SpriteRenderer topRightArmSprite;
+    [SerializeField] private SpriteRenderer bottomRightArmSprite;
+    [SerializeField] private SpriteRenderer topLeftLegSprite;
+    [SerializeField] private SpriteRenderer bottomLeftLegSprite;
+    [SerializeField] private SpriteRenderer topRightLegSprite;
+    [SerializeField] private SpriteRenderer bottomRightLegSprite;
 
     private Rigidbody2D _leftLegRB;
     private Rigidbody2D _rightLegRB;
@@ -45,7 +54,6 @@ public class Movement : MonoBehaviour
 
         if (horizontalInput != 0)
         {
-
             FlipCharacter(horizontalInput);
 
             if (!_isWalking)
@@ -66,9 +74,10 @@ public class Movement : MonoBehaviour
     {
         _isOnGround = Physics2D.OverlapCircle(playerPos.position, positionRadius, ground);
 
-        // GetButtonDown("Jump") gère Espace par défaut dans Unity.
-        // Pour ZQSD/WASD/Flèches, on vérifie si l'axe Vertical vient de dépasser un seuil.
-        bool jumpKeyPressed = Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.W);
+        bool jumpKeyPressed = Input.GetButtonDown("Jump") || 
+                            Input.GetKeyDown(KeyCode.UpArrow) || 
+                            Input.GetKeyDown(KeyCode.Z) || 
+                            Input.GetKeyDown(KeyCode.W);
 
         if (_isOnGround && jumpKeyPressed)
         {
@@ -84,24 +93,30 @@ public class Movement : MonoBehaviour
 
         while (_isWalking)
         {
-            _leftLegRB.AddForce(force * Time.deltaTime);
+            if (_leftLegRB != null)
+                _leftLegRB.AddForce(force * Time.deltaTime);
             yield return new WaitForSeconds(stepWait);
 
-            _rightLegRB.AddForce(force * Time.deltaTime);
+            if (_rightLegRB != null)
+                _rightLegRB.AddForce(force * Time.deltaTime);
             yield return new WaitForSeconds(stepWait);
         }
     }
 
     private void FlipCharacter(float direction)
     {
-        // On ne change le scale que si nécessaire pour éviter les calculs inutiles
-        if (direction > 0 && GFX_Container.localScale.x < 0)
-        {
-            GFX_Container.localScale = new Vector3(1, 1, 1);
-        }
-        else if (direction < 0 && GFX_Container.localScale.x > 0)
-        {
-            GFX_Container.localScale = new Vector3(-1, 1, 1);
-        }
+        bool flipX = direction < 0; // true = gauche, false = droite
+
+        // Flip SEULEMENT les sprites, ne touche PAS aux positions
+        if (headSprite != null) headSprite.flipX = flipX;
+        if (bodySprite != null) bodySprite.flipX = flipX;
+        if (topLeftArmSprite != null) topLeftArmSprite.flipX = flipX;
+        if (bottomLeftArmSprite != null) bottomLeftArmSprite.flipX = flipX;
+        if (topRightArmSprite != null) topRightArmSprite.flipX = flipX;
+        if (bottomRightArmSprite != null) bottomRightArmSprite.flipX = flipX;
+        if (topLeftLegSprite != null) topLeftLegSprite.flipX = flipX;
+        if (bottomLeftLegSprite != null) bottomLeftLegSprite.flipX = flipX;
+        if (topRightLegSprite != null) topRightLegSprite.flipX = flipX;
+        if (bottomRightLegSprite != null) bottomRightLegSprite.flipX = flipX;
     }
 }

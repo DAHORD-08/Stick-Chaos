@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 8bae8e7da10224b43b83d2f11810502b
+guid: ec8096e4a96c42f40af318c5564ebaea
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
-    mipMapMode: 0
-    enableMipMap: 0
+    mipMapMode: 1
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -70,9 +70,9 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bg_test_0
+      name: ClassicBody_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 9999
-        height: 10000
+        x: 373
+        y: 121
+        width: 215
+        height: 758
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 518e59578ca38c24e9ebd31bb739ea5b
-      internalID: -464821980
+      spriteID: 44cb550343155d146a73a74a973a17a3
+      internalID: 1897220055
       vertices: []
       indices: 
       edges: []
@@ -122,7 +122,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: bc8f825d7c0083744882ae0ed35027b8
+    spriteID: 1c3093f443994bc43ab64decf912e772
     internalID: 0
     vertices: []
     indices: 
@@ -132,7 +132,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bg_test_0: -464821980
+      ClassicBody_0: 1897220055
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

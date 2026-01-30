@@ -1011,7 +1011,7 @@ GameObject:
   m_Component:
   - component: {fileID: 682118835}
   - component: {fileID: 682118834}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bg_test_0 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1998,7 +1998,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1761222189}
   - component: {fileID: 1761222188}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Baseplate 1_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2052,7 +2052,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 15
   m_MaskInteraction: 0
   m_Sprite: {fileID: -1509417143, guid: 20fb67070172ff447b4e7cd5c10bee62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

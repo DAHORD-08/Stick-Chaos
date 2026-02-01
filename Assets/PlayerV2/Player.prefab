@@ -2002,15 +2002,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d408d6b4f66b064f8e607d8fab882e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
-  leftLeg: {fileID: 0}
-  rightLeg: {fileID: 0}
+  leftLeg: {fileID: 7162530331492275069}
+  rightLeg: {fileID: 6665395683961475544}
   rb: {fileID: 6308960075365957098}
   anim: {fileID: 789536705112869864}
   playerPos: {fileID: 1869126880562990292}
-  speed: 1.5
-  stepWait: 0.5
-  jumpForce: 10
-  positionRadius: 0
+  speed: 85
+  stepWait: 0.2
+  jumpForce: 250
+  positionRadius: 0.3
   ground:
     serializedVersion: 2
     m_Bits: 8

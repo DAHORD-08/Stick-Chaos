@@ -61,7 +61,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: targetRotation
-    path: ClassicLeg_1
+    path: LeftUpLeg
     classID: 114
     script: {fileID: 11500000, guid: 35b4d84c1e6c0194eb62b9c6b6ca8e21, type: 3}
     flags: 0
@@ -109,7 +109,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: targetRotation
-    path: ClassicLeg_2
+    path: RightUpLeg
     classID: 114
     script: {fileID: 11500000, guid: 35b4d84c1e6c0194eb62b9c6b6ca8e21, type: 3}
     flags: 0
@@ -122,7 +122,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 2481126146
+      path: 392266736
       attribute: 1865065137
       script: {fileID: 11500000, guid: 35b4d84c1e6c0194eb62b9c6b6ca8e21, type: 3}
       typeID: 114
@@ -131,7 +131,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 183216824
+      path: 1971262097
       attribute: 1865065137
       script: {fileID: 11500000, guid: 35b4d84c1e6c0194eb62b9c6b6ca8e21, type: 3}
       typeID: 114
@@ -205,7 +205,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: targetRotation
-    path: ClassicLeg_1
+    path: LeftUpLeg
     classID: 114
     script: {fileID: 11500000, guid: 35b4d84c1e6c0194eb62b9c6b6ca8e21, type: 3}
     flags: 0
@@ -253,7 +253,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: targetRotation
-    path: ClassicLeg_2
+    path: RightUpLeg
     classID: 114
     script: {fileID: 11500000, guid: 35b4d84c1e6c0194eb62b9c6b6ca8e21, type: 3}
     flags: 0

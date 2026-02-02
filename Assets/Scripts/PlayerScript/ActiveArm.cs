@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ArmController : MonoBehaviour
+public class ActiveArm : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] private Rigidbody2D rb;
@@ -19,11 +19,19 @@ public class ArmController : MonoBehaviour
         if (rb == null) rb = GetComponent<Rigidbody2D>();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (!isActive) return;
 
-        RotateTowardsMouse();
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = mousePos - transform.position;
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + rotationOffset;
+
+        // Calcul du torque avec amortissement (Damping)
+        float angleError = Mathf.DeltaAngle(rb.rotation, targetAngle);
+        float torque = (angleError * torqueForce) - (rb.angularVelocity * damping);
+
+        rb.AddTorque(torque);
     }
 
     private void RotateTowardsMouse()

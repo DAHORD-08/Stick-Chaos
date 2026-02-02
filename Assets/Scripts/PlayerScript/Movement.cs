@@ -20,9 +20,9 @@ public class Movement : MonoBehaviour
     [SerializeField] private float positionRadius = 0.2f;
     [SerializeField] private LayerMask ground;
 
-    [Header("Arm Components")]
-    [SerializeField] private ArmController leftArmScript;
-    [SerializeField] private ArmController rightArmScript;
+    [Header("Arm Controllers")]
+    [SerializeField] private Arms leftArmScript;  // Assurez-vous d'avoir renommé votre script ArmController en ActiveArm
+    [SerializeField] private Arms rightArmScript;
 
     private float _lastClickTime;
     private const float DoubleClickTimeThreshold = 0.25f;
@@ -37,13 +37,16 @@ public class Movement : MonoBehaviour
     {
         if (leftLeg != null) _leftLegRB = leftLeg.GetComponent<Rigidbody2D>();
         if (rightLeg != null) _rightLegRB = rightLeg.GetComponent<Rigidbody2D>();
+
+        // Optionnel : Ignorer les collisions internes pour éviter que le perso ne tremble
+        IgnoreInternalCollisions();
     }
 
     private void Update()
     {
         HandleMovementInput();
         HandleJumpInput();
-        HandleArmInput();
+        HandleArmInput(); // Gestion des bras incluse ici
     }
 
     private void HandleMovementInput()
@@ -52,10 +55,7 @@ public class Movement : MonoBehaviour
 
         if (horizontalInput != 0)
         {
-            if (headSprite != null)
-            {
-                headSprite.flipX = (horizontalInput < 0);
-            }
+            if (headSprite != null) headSprite.flipX = (horizontalInput < 0);
 
             if (!_isWalking)
             {
@@ -74,15 +74,11 @@ public class Movement : MonoBehaviour
 
     private void HandleJumpInput()
     {
-        // 1. Détection précise du sol
         _isOnGround = Physics2D.OverlapCircle(playerPos.position, positionRadius, ground);
-
-        // 2. Détection de l'intention de saut (Appui initial uniquement)
         bool jumpKeyPressed = Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.W);
 
         if (_isOnGround && jumpKeyPressed)
         {
-            // 3. Application d'une force d'impulsion unique
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
@@ -90,7 +86,7 @@ public class Movement : MonoBehaviour
 
     private void HandleArmInput()
     {
-        // Détection double-clic (Bouton Gauche)
+        // Détection Double Clic Gauche
         if (Input.GetMouseButtonDown(0))
         {
             if (Time.time - _lastClickTime < DoubleClickTimeThreshold)
@@ -100,41 +96,50 @@ public class Movement : MonoBehaviour
             _lastClickTime = Time.time;
         }
 
-        // Arrêt si aucun bouton n'est pressé
+        // Si on relâche tout, on désactive le mode "deux bras"
         if (!Input.GetMouseButton(0) && !Input.GetMouseButton(1))
         {
             _bothArmsActive = false;
-            leftArmScript.isActive = false;
-            rightArmScript.isActive = false;
-            return;
         }
 
-        // Activation dynamique
+        // Application aux scripts de bras
         if (_bothArmsActive)
         {
-            leftArmScript.isActive = true;
-            rightArmScript.isActive = true;
+            leftArmScript.mouseButton = 0; // Le script Arms utilisera GetMouseButton(0)
+            rightArmScript.mouseButton = 0; // Le bras droit suit aussi le clic gauche
         }
         else
         {
-            leftArmScript.isActive = Input.GetMouseButton(0);
-            rightArmScript.isActive = Input.GetMouseButton(1);
+            leftArmScript.mouseButton = 0;
+            rightArmScript.mouseButton = 1;
         }
     }
 
     private IEnumerator WalkCycle(float direction)
     {
         _isWalking = true;
-        Vector2 force = new Vector2(direction, 0) * (speed * 1000);
+        // Simplification demandée : retrait de Time.deltaTime
+        Vector2 force = new Vector2(direction, 0) * (speed * 1000f);
 
         while (_isWalking)
         {
-            _leftLegRB.AddForce(force);
+            if (_leftLegRB != null) _leftLegRB.AddForce(force);
             yield return new WaitForSeconds(stepWait);
 
-            _rightLegRB.AddForce(force);
+            if (_rightLegRB != null) _rightLegRB.AddForce(force);
             yield return new WaitForSeconds(stepWait);
         }
     }
 
+    private void IgnoreInternalCollisions()
+    {
+        Collider2D[] colliders = GetComponentsInChildren<Collider2D>();
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            for (int k = i + 1; k < colliders.Length; k++)
+            {
+                Physics2D.IgnoreCollision(colliders[i], colliders[k]);
+            }
+        }
+    }
 }

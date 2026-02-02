@@ -781,7 +781,7 @@ PrefabInstance:
       objectReference: {fileID: 1025641156}
     - target: {fileID: 5725647363353603971, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: positionRadius
-      value: 0.3
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5725647363353603971, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: rightArmScript
@@ -875,9 +875,6 @@ PrefabInstance:
       addedObject: {fileID: 1466722715}
     - targetCorrespondingSourceObject: {fileID: 2576780822397020172, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1025641148}
-    - targetCorrespondingSourceObject: {fileID: 2576780822397020172, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1466722709}
     - targetCorrespondingSourceObject: {fileID: 2576780822397020172, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       insertIndex: -1
@@ -888,9 +885,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4761050447015126382, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       insertIndex: 3
       addedObject: {fileID: 1025641165}
-    - targetCorrespondingSourceObject: {fileID: 4761050447015126382, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1025641159}
     - targetCorrespondingSourceObject: {fileID: 4761050447015126382, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1025641158}
@@ -918,22 +912,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5544635673831742167, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
   m_PrefabInstance: {fileID: 1025641138}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1025641148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1025641143}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a98504a99f1282d4c8f0b47d2e104dea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Arms
-  speed: 300
-  rb: {fileID: 0}
-  cam: {fileID: 0}
-  mouseButton: 0
 --- !u!114 &1025641151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1002,24 +980,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.01, y: -0.43}
   m_Radius: 0.3132192
---- !u!114 &1025641159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1025641139}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a98504a99f1282d4c8f0b47d2e104dea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Grabber
-  rb: {fileID: 0}
-  _mainCam: {fileID: 0}
-  torqueForce: 1500
-  damping: 40
-  rotationOffset: 0
-  isActive: 0
 --- !u!114 &1025641165
 MonoBehaviour:
   m_ObjectHideFlags: 0

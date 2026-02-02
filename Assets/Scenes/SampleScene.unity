@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arms
   rb: {fileID: 1444990308}
-  torqueForce: 150
+  torqueForce: 50
   damping: 20
   rotationOffset: 0
   isActive: 0
@@ -949,7 +949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arms
   rb: {fileID: 1444990308}
-  torqueForce: 150
+  torqueForce: 50
   damping: 20
   rotationOffset: 0
   isActive: 0

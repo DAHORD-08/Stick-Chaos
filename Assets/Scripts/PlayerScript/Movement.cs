@@ -129,11 +129,12 @@ public class Movement : MonoBehaviour
 
         while (_isWalking)
         {
-            _leftLegRB.AddForce(force * Time.deltaTime);
+            _leftLegRB.AddForce(force);
             yield return new WaitForSeconds(stepWait);
 
-            _rightLegRB.AddForce(force * Time.deltaTime);
+            _rightLegRB.AddForce(force);
             yield return new WaitForSeconds(stepWait);
         }
     }
+
 }

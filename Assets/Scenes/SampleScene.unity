@@ -119,23 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &46142544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1025641141}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a98504a99f1282d4c8f0b47d2e104dea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Arms
-  rb: {fileID: 1444990308}
-  torqueForce: 200
-  damping: 60
-  rotationOffset: 0
-  isActive: 0
 --- !u!1 &98860156
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +233,7 @@ Transform:
   m_GameObject: {fileID: 98860156}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.94, y: 1.02, z: 0}
+  m_LocalPosition: {x: -3.94, y: 16.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -810,11 +793,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6596596335905284303, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.84
+      value: -7.03
       objectReference: {fileID: 0}
     - target: {fileID: 6596596335905284303, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.07
+      value: 7.71
       objectReference: {fileID: 0}
     - target: {fileID: 6596596335905284303, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: m_LocalPosition.z
@@ -886,9 +869,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5544635673831742167, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1025641149}
-    - targetCorrespondingSourceObject: {fileID: 5544635673831742167, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1025641156}
     - targetCorrespondingSourceObject: {fileID: 2576780822397020172, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       insertIndex: 3
@@ -902,9 +882,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2576780822397020172, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1466722716}
-    - targetCorrespondingSourceObject: {fileID: 6760534143774177239, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 46142544}
     - targetCorrespondingSourceObject: {fileID: 6760534143774177239, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1025641151}
@@ -953,28 +930,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a98504a99f1282d4c8f0b47d2e104dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arms
+  speed: 300
   rb: {fileID: 0}
-  torqueForce: 1500
-  damping: 40
-  rotationOffset: 0
-  isActive: 0
---- !u!114 &1025641149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1025641145}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a98504a99f1282d4c8f0b47d2e104dea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Arms
-  rb: {fileID: 1444990308}
-  torqueForce: 200
-  damping: 60
-  rotationOffset: 0
-  isActive: 0
+  cam: {fileID: 0}
+  mouseButton: 0
 --- !u!114 &1025641151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1056,6 +1015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grabber
   rb: {fileID: 0}
+  _mainCam: {fileID: 0}
   torqueForce: 1500
   damping: 40
   rotationOffset: 0

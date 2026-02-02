@@ -119,6 +119,21 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &46142544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025641141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98504a99f1282d4c8f0b47d2e104dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Arms
+  rb: {fileID: 1025641140}
+  cam: {fileID: 519420031}
+  mousebutton: 323
 --- !u!1 &183832584
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,8 +651,105 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5544635673831742167, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1025641149}
+    - targetCorrespondingSourceObject: {fileID: 2576780822397020172, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1025641148}
+    - targetCorrespondingSourceObject: {fileID: 6760534143774177239, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 46142544}
+    - targetCorrespondingSourceObject: {fileID: 4761050447015126382, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1025641147}
   m_SourcePrefab: {fileID: 100100000, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+--- !u!1 &1025641139 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4761050447015126382, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+  m_PrefabInstance: {fileID: 1025641138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1025641140 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 6757156122249101893, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+  m_PrefabInstance: {fileID: 1025641138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1025641141 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6760534143774177239, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+  m_PrefabInstance: {fileID: 1025641138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1025641142 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 5601964479274722434, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+  m_PrefabInstance: {fileID: 1025641138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1025641143 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2576780822397020172, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+  m_PrefabInstance: {fileID: 1025641138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1025641144 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 6969126391331045142, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+  m_PrefabInstance: {fileID: 1025641138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1025641145 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5544635673831742167, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+  m_PrefabInstance: {fileID: 1025641138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1025641146 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 2836559582116785687, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+  m_PrefabInstance: {fileID: 1025641138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1025641147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025641139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98504a99f1282d4c8f0b47d2e104dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Arms
+  rb: {fileID: 1025641142}
+  cam: {fileID: 519420031}
+  mousebutton: 323
+--- !u!114 &1025641148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025641143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98504a99f1282d4c8f0b47d2e104dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Arms
+  rb: {fileID: 1025641146}
+  cam: {fileID: 519420031}
+  mousebutton: 324
+--- !u!114 &1025641149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025641145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98504a99f1282d4c8f0b47d2e104dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Arms
+  rb: {fileID: 1025641144}
+  cam: {fileID: 519420031}
+  mousebutton: 324
 --- !u!1 &1519652070
 GameObject:
   m_ObjectHideFlags: 0

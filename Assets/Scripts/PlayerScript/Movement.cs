@@ -118,7 +118,7 @@ public class Movement : MonoBehaviour
     private IEnumerator WalkCycle(float direction)
     {
         _isWalking = true;
-        // Simplification demandée : retrait de Time.deltaTime
+        // Supprimez Time.deltaTime ici. On utilise une force d'impulsion pure.
         Vector2 force = new Vector2(direction, 0) * (speed * 1000f);
 
         while (_isWalking)

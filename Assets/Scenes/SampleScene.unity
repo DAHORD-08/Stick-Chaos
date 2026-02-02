@@ -753,7 +753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5725647363353603971, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: speed
-      value: 5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5725647363353603971, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: leftLeg
@@ -769,7 +769,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5725647363353603971, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: jumpForce
-      value: 10
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 5725647363353603971, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: headSprite

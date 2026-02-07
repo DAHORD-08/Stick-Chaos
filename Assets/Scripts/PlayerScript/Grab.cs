@@ -2,36 +2,75 @@ using UnityEngine;
 
 public class Grab : MonoBehaviour
 {
-    private bool _hold = false;
-    public int mouseButton; // Doit correspondre au bouton du bras associé
-    private FixedJoint2D _joint;
+    private Rigidbody2D _grabbedObjectRB;
+    private Rigidbody2D _armRB;
+    private Vector3 _grabOffset; // Offset entre la main et l'arme
+    private bool _isGrabbing = false;
+
+    void Start()
+    {
+        _armRB = GetComponent<Rigidbody2D>();
+    }
 
     void Update()
     {
-        // On vérifie si on maintient le clic pour savoir si on veut "tenir"
-        if (Input.GetMouseButton(mouseButton))
+        // Relâcher le grip quand on relâche le bouton gauche
+        if (!Input.GetMouseButton(0))
         {
-            _hold = true;
+            ReleaseGrab();
         }
-        else
+    }
+
+    void FixedUpdate()
+    {
+        // Si on grab, attirer l'arme DOUCEMENT vers la main
+        if (_isGrabbing && _grabbedObjectRB != null)
         {
-            _hold = false;
-            // Si on relâche, on détruit le lien physique
-            if (_joint != null)
+            Vector3 directionToHand = (transform.position - _grabbedObjectRB.transform.position);
+
+            // Force très faible pour un mouvement fluide
+            float grabForce = 5f; // À ajuster si nécessaire
+            _grabbedObjectRB.linearVelocity = directionToHand.normalized * grabForce;
+
+            // Arrêter la rotation de l'arme
+            _grabbedObjectRB.angularVelocity = 0f;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Entrer en contact avec un objet grabbable ET maintenir le clic
+        if (collision.CompareTag("Grabbable") && Input.GetMouseButton(0) && !_isGrabbing)
+        {
+            Rigidbody2D weaponRB = collision.attachedRigidbody;
+
+            if (weaponRB != null)
             {
-                Destroy(_joint);
+
+                _grabbedObjectRB = weaponRB;
+                _isGrabbing = true;
+
+                // Désactiver la gravité de l'arme
+                _grabbedObjectRB.gravityScale = 0f;
+
+                // Calculer l'offset
+                _grabOffset = _grabbedObjectRB.transform.position - transform.position;
             }
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void ReleaseGrab()
     {
-        // Si on touche un objet avec un Rigidbody en maintenant le clic
-        if (_hold && collision.rigidbody != null && _joint == null)
+        if (_isGrabbing)
         {
-            // On crée dynamiquement un FixedJoint2D pour "coller" l'objet à la main
-            _joint = gameObject.AddComponent<FixedJoint2D>();
-            _joint.connectedBody = collision.rigidbody;
+            _isGrabbing = false;
+
+            if (_grabbedObjectRB != null)
+            {
+                _grabbedObjectRB.gravityScale = 1f;
+                _grabbedObjectRB.linearVelocity = Vector2.zero;
+                _grabbedObjectRB = null;
+            }
         }
     }
 }

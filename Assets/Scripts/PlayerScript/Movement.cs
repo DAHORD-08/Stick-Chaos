@@ -20,14 +20,6 @@ public class Movement : MonoBehaviour
     [SerializeField] private float positionRadius = 0.2f;
     [SerializeField] private LayerMask ground;
 
-    [Header("Arm Controllers")]
-    [SerializeField] private Arms leftArmScript;  // Assurez-vous d'avoir renommé votre script ArmController en ActiveArm
-    [SerializeField] private Arms rightArmScript;
-
-    private float _lastClickTime;
-    private const float DoubleClickTimeThreshold = 0.25f;
-    private bool _bothArmsActive = false;
-
     private Rigidbody2D _leftLegRB;
     private Rigidbody2D _rightLegRB;
     private bool _isOnGround;
@@ -38,7 +30,7 @@ public class Movement : MonoBehaviour
         if (leftLeg != null) _leftLegRB = leftLeg.GetComponent<Rigidbody2D>();
         if (rightLeg != null) _rightLegRB = rightLeg.GetComponent<Rigidbody2D>();
 
-        // Optionnel : Ignorer les collisions internes pour éviter que le perso ne tremble
+        // Ignorer les collisions internes pour éviter que le perso ne tremble
         IgnoreInternalCollisions();
     }
 
@@ -46,7 +38,6 @@ public class Movement : MonoBehaviour
     {
         HandleMovementInput();
         HandleJumpInput();
-        HandleArmInput(); // Gestion des bras incluse ici
     }
 
     private void HandleMovementInput()
@@ -84,41 +75,9 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private void HandleArmInput()
-    {
-        // Détection Double Clic Gauche
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (Time.time - _lastClickTime < DoubleClickTimeThreshold)
-            {
-                _bothArmsActive = true;
-            }
-            _lastClickTime = Time.time;
-        }
-
-        // Si on relâche tout, on désactive le mode "deux bras"
-        if (!Input.GetMouseButton(0) && !Input.GetMouseButton(1))
-        {
-            _bothArmsActive = false;
-        }
-
-        // Application aux scripts de bras
-        if (_bothArmsActive)
-        {
-            leftArmScript.mouseButton = 0; // Le script Arms utilisera GetMouseButton(0)
-            rightArmScript.mouseButton = 0; // Le bras droit suit aussi le clic gauche
-        }
-        else
-        {
-            leftArmScript.mouseButton = 0;
-            rightArmScript.mouseButton = 1;
-        }
-    }
-
     private IEnumerator WalkCycle(float direction)
     {
         _isWalking = true;
-        // Supprimez Time.deltaTime ici. On utilise une force d'impulsion pure.
         Vector2 force = new Vector2(direction, 0) * (speed * 1000f);
 
         while (_isWalking)

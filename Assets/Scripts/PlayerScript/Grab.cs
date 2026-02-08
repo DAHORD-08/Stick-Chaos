@@ -5,9 +5,16 @@ public class Grab : MonoBehaviour
     private Rigidbody2D _grabbedObjectRB;
     private FixedJoint2D _joint;
     private bool _isGrabbing = false;
+    private Rigidbody2D _playerBodyRB;
+    private RigidbodyConstraints2D _originalConstraints;
 
     // Propriété publique pour que Arms.cs puisse vérifier l'état du grab
     public bool IsGrabbing => _isGrabbing;
+
+    void Start()
+    {
+        _playerBodyRB = GetComponentInParent<Rigidbody2D>();
+    }
 
     void Update()
     {
@@ -39,6 +46,14 @@ public class Grab : MonoBehaviour
         _grabbedObjectRB = weaponRB;
         _isGrabbing = true;
 
+        // GELER LA ROTATION DU CORPS DU JOUEUR
+        if (_playerBodyRB != null)
+        {
+            _originalConstraints = _playerBodyRB.constraints;
+            _playerBodyRB.constraints = RigidbodyConstraints2D.FreezeRotation;
+            _playerBodyRB.angularVelocity = 0f;
+        }
+
         // Créer un FixedJoint2D pour lier l'arme au bras
         _joint = gameObject.AddComponent<FixedJoint2D>();
         _joint.connectedBody = _grabbedObjectRB;
@@ -62,6 +77,13 @@ public class Grab : MonoBehaviour
         UnityEngine.Debug.Log("✓ Released grab");
 
         _isGrabbing = false;
+
+        // RESTAURER LES CONSTRAINTS ORIGINALES DU CORPS
+        if (_playerBodyRB != null)
+        {
+            _playerBodyRB.constraints = _originalConstraints;
+            _playerBodyRB.angularVelocity = 0f;
+        }
 
         if (_joint != null)
         {

@@ -801,13 +801,13 @@ FixedJoint2D:
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 570022303}
+  m_ConnectedRigidBody: {fileID: 1276689280}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 2.6517606, y: -2.5142958}
+  m_ConnectedAnchor: {x: 2.0232515, y: -1.9226077}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!1 &916066883 stripped
@@ -827,6 +827,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 7a7a4bd460b50c9418e4034336eb7449, type: 2}
+    - target: {fileID: 1240779331018510724, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+      propertyPath: m_AngleLimits.m_LowerAngle
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1240779331018510724, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+      propertyPath: m_AngleLimits.m_UpperAngle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1840666417739548416, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: m_AngleLimits.m_UpperAngle
       value: 180
@@ -856,6 +864,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3306267827913763480, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+      propertyPath: m_AngleLimits.m_LowerAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306267827913763480, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: m_AngleLimits.m_UpperAngle
       value: 180
       objectReference: {fileID: 0}
@@ -870,6 +882,10 @@ PrefabInstance:
     - target: {fileID: 4796936218398470023, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5107655365973158435, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+      propertyPath: m_AngleLimits.m_LowerAngle
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5107655365973158435, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: m_AngleLimits.m_UpperAngle
@@ -931,9 +947,25 @@ PrefabInstance:
       propertyPath: rightArmScript
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6111948081092086343, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+      propertyPath: m_AngleLimits.m_LowerAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6111948081092086343, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+      propertyPath: m_AngleLimits.m_UpperAngle
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 6308960075365957098, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: m_Mass
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6551330660606659799, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+      propertyPath: m_AngleLimits.m_LowerAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6551330660606659799, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+      propertyPath: m_AngleLimits.m_UpperAngle
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 6596596335905284303, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -979,6 +1011,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6754302705973799646, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+      propertyPath: m_AngleLimits.m_LowerAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6754302705973799646, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+      propertyPath: m_AngleLimits.m_UpperAngle
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 6757156122249101893, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: m_Mass
       value: 0.5
@@ -998,6 +1038,14 @@ PrefabInstance:
     - target: {fileID: 7804400667470874404, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028410655747615890, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+      propertyPath: m_AngleLimits.m_LowerAngle
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028410655747615890, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
+      propertyPath: m_AngleLimits.m_UpperAngle
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8782912962267761984, guid: 2784f7b4fa04e83478c1c59f2546d2ad, type: 3}
       propertyPath: m_Layer
